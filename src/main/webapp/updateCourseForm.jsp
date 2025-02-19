@@ -1,16 +1,28 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: oucht
-  Date: 19/02/2025
-  Time: 09:53
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page import="com.example.edumanager.model.Course" %>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mise à jour de cours</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Mise à jour de cours</h2>
+    <form action="updateCourse" method="post">
+        <input type="hidden" name="id" value="${course.id}" />
+        <div class="form-group">
+            <label for="nom_cours">Nom du cours:</label>
+            <input type="text" class="form-control" id="nom_cours" name="nom_cours" value="${course.nomCours}" required />
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" required>${course.description}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
+    </form>
+</div>
 </body>
 </html>
