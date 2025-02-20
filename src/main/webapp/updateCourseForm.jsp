@@ -11,7 +11,12 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Mise à jour de cours</h2>
-    <form action="updateCourse" method="post">
+    <% if(request.getAttribute("error") != null) { %>
+    <div class="alert alert-danger">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    <form action="update" method="post">
         <input type="hidden" name="id" value="${course.id}" />
         <div class="form-group">
             <label for="nom_cours">Nom du cours:</label>
@@ -21,7 +26,8 @@
             <label for="description">Description:</label>
             <textarea class="form-control" id="description" name="description" required>${course.description}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <a href="read" class="btn btn-secondary">Retour</a>
     </form>
 </div>
 </body>

@@ -10,7 +10,12 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Formulaire de création de cours</h2>
-    <form action="createCourse" method="post">
+    <% if(request.getAttribute("error") != null) { %>
+    <div class="alert alert-danger">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    <form action="create" method="post">
         <div class="form-group">
             <label for="nom_cours">Nom du cours:</label>
             <input type="text" class="form-control" id="nom_cours" name="nom_cours" required />
@@ -19,7 +24,8 @@
             <label for="description">Description:</label>
             <textarea class="form-control" id="description" name="description" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Créer</button>
+        <button type="submit" class="btn btn-primary">Créer</button>
+        <a href="read" class="btn btn-secondary">Retour</a>
     </form>
 </div>
 </body>

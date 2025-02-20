@@ -10,7 +10,12 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Formulaire de création d'étudiant</h2>
-    <form action="createStudent" method="post">
+    <% if(request.getAttribute("error") != null) { %>
+    <div class="alert alert-danger">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    <form action="/Edumanager_war_exploded/students/create" method="post">
         <div class="form-group">
             <label for="nom">Nom:</label>
             <input type="text" class="form-control" id="nom" name="nom" required />
@@ -27,7 +32,8 @@
             <label for="date_naissance">Date de naissance:</label>
             <input type="date" class="form-control" id="date_naissance" name="date_naissance" required />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Créer</button>
+        <button type="submit" class="btn btn-primary">Créer</button>
+        <a href="/Edumanager_war_exploded/students/read" class="btn btn-secondary">Retour</a>
     </form>
 </div>
 </body>

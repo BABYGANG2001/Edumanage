@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.edumanager.model.Student" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,7 +12,17 @@
 <body>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Mise à jour d'étudiant</h2>
-    <form action="updateStudent" method="post">
+    <% if(request.getAttribute("error") != null) { %>
+    <div class="alert alert-danger">
+        <%= request.getAttribute("error") %>
+    </div>
+    <% } %>
+    <%
+        Student student = (Student) request.getAttribute("student");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateStr = sdf.format(student.getDateNaissance());
+    %>
+    <form action="/Edumanager_war_exploded/students/update" method="post">
         <input type="hidden" name="id" value="${student.id}" />
         <div class="form-group">
             <label for="nom">Nom:</label>
@@ -27,9 +38,10 @@
         </div>
         <div class="form-group">
             <label for="date_naissance">Date de naissance:</label>
-            <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="${student.dateNaissance}" required />
+            <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="<%= dateStr %>" required />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Mettre à jour</button>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <a href="/Edumanager_war_exploded/students/read" class="btn btn-secondary">Retour</a>
     </form>
 </div>
 </body>
