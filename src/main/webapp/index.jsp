@@ -47,6 +47,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="students/read">Étudiants</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="enrollments">Inscriptions</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -61,7 +64,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card text-center p-4">
                 <div class="card-body">
                     <i class="fas fa-book card-icon"></i>
@@ -71,24 +74,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card text-center p-4">
                 <div class="card-body">
                     <i class="fas fa-user-graduate card-icon"></i>
                     <h3 class="card-title">Gestion des Étudiants</h3>
-                    <p class="card-text">Gérez les informations des étudiants, inscriptions et suivez leur progression académique.</p>
+                    <p class="card-text">Gérez les informations des étudiants et suivez leur progression académique.</p>
                     <a href="students/read" class="btn btn-success btn-lg">Accéder aux Étudiants</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <div class="card-body">
+                    <i class="fas fa-users card-icon" style="color: #9c27b0;"></i>
+                    <h3 class="card-title">Gestion des Inscriptions</h3>
+                    <p class="card-text">Inscrivez les étudiants aux cours et gérez les inscriptions existantes.</p>
+                    <a href="enrollments" class="btn btn-lg" style="background-color: #9c27b0; color: white;">Accéder aux Inscriptions</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<footer class="bg-dark text-white mt-5 py-4">
-    <div class="container text-center">
-        <p>© 2025 EduManager - Système de Gestion Éducative</p>
-    </div>
-</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
