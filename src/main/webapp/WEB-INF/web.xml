@@ -10,12 +10,32 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
+    <!-- Filtre d'authentification -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.example.edumanager.filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
+    <!-- Configuration du servlet de connexion -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.edumanager.controllers.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <!-- Autres servlets existants -->
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>com.example.edumanager.controllers.HomeServlet</servlet-class>
     </servlet>
-
 
     <servlet>
         <servlet-name>CourseServlet</servlet-name>
@@ -53,7 +73,6 @@
         <url-pattern>/enrollments/showEnrollForm</url-pattern>
     </servlet-mapping>
 
-
     <servlet-mapping>
         <servlet-name>CourseServlet</servlet-name>
         <url-pattern>/create</url-pattern>
@@ -64,10 +83,8 @@
         <url-pattern>/showUpdateForm</url-pattern>
     </servlet-mapping>
 
-
-
     <servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
+        <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
@@ -81,6 +98,9 @@
         <url-pattern>/students/showUpdateForm</url-pattern>
     </servlet-mapping>
 
-
+    <!-- Configuration de la session -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
 </web-app>
