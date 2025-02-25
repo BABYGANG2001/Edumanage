@@ -1,55 +1,28 @@
 package com.example.edumanager.model;
 
-import java.io.Serializable;
-import java.util.Objects;
 
-/**
- * Représente un utilisateur du système EduManager
- */
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private Long id;
+public class User {
+    private int id;
     private String username;
     private String password;
     private String role;
-    private boolean active;
 
-    /**
-     * Constructeur par défaut
-     */
+
     public User() {
     }
 
-    /**
-     * Constructeur avec tous les champs
-     */
-    public User(Long id, String username, String password, String role, boolean active) {
-        this.id = id;
+
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.active = active;
     }
 
-    /**
-     * Constructeur sans id (utile pour la création)
-     */
-    public User(String username, String password, String role, boolean active) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.active = active;
-    }
-
-    // Getters et Setters
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -77,63 +50,13 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public boolean isActive() {
-        return active;
+    //Vérifie si le mot de passe fourni correspond au mot de passe de l'utilisateur
+
+    public boolean checkPassword(String rawPassword) {
+        return this.password.equals(rawPassword);
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    /**
-     * Vérifie si l'utilisateur a un rôle spécifique
-     */
     public boolean hasRole(String roleToCheck) {
-        return this.role != null && this.role.equals(roleToCheck);
-    }
-
-    /**
-     * Vérifie si l'utilisateur est un administrateur
-     */
-    public boolean isAdmin() {
-        return hasRole("admin");
-    }
-
-    /**
-     * Vérifie si l'utilisateur est un enseignant
-     */
-    public boolean isTeacher() {
-        return hasRole("teacher");
-    }
-
-    /**
-     * Vérifie si les informations d'identification sont valides
-     */
-    public boolean checkCredentials(String password) {
-        return this.password != null && this.password.equals(password) && this.active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(username, user.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
-                ", active=" + active +
-                '}';
+        return this.role.equals(roleToCheck);
     }
 }

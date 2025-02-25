@@ -1,25 +1,29 @@
 package com.example.edumanager.controllers;
 
+import com.example.edumanager.model.User;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Cookie;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Servlet pour gérer l'authentification des utilisateurs
  */
 public class LoginServlet extends HttpServlet {
 
-    // Utilisateurs en dur pour la démonstration
-    // Dans une application réelle, utiliser une base de données et des mots de passe hashés
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "admin123";
-    private static final String TEACHER_USERNAME = "prof";
-    private static final String TEACHER_PASSWORD = "prof123";
+    // Map des utilisateurs (simulation d'une base de données)
+    private static final Map<String, User> users = new HashMap<>();
+
+    // Initialisation des utilisateurs
+    static {
+        users.put("admin", new User("admin", "admin123", "admin"));
+        users.put("prof", new User("prof", "prof123", "teacher"));
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,14 +55,12 @@ public class LoginServlet extends HttpServlet {
         String rememberMe = request.getParameter("rememberMe");
 
         // Vérification des identifiants
-        if (isValidUser(username, password)) {
+        User user = authenticateUser(username, password);
+        if (user != null) {
             // Création de la session
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-
-            // Déterminer le rôle de l'utilisateur
-            String role = ADMIN_USERNAME.equals(username) ? "admin" : "teacher";
-            session.setAttribute("role", role);
+            session.setAttribute("role", user.getRole());
 
             // Gestion du "Se souvenir de moi"
             if (rememberMe != null) {
@@ -77,15 +79,18 @@ public class LoginServlet extends HttpServlet {
     }
 
     /**
-     * Méthode pour vérifier les identifiants de l'utilisateur
+     * Méthode pour authentifier un utilisateur
+     *
+     * @param username Nom d'utilisateur
+     * @param password Mot de passe
+     * @return L'utilisateur authentifié ou null si authentification échouée
      */
-    private boolean isValidUser(String username, String password) {
-        if (username == null || password == null) {
-            return false;
+    private User authenticateUser(String username, String password) {
+        User user = users.get(username);
+        if (user != null && user.checkPassword(password)) {
+            return user;
         }
-
-        return (ADMIN_USERNAME.equals(username) && ADMIN_PASSWORD.equals(password)) ||
-                (TEACHER_USERNAME.equals(username) && TEACHER_PASSWORD.equals(password));
+        return null;
     }
 
     /**
