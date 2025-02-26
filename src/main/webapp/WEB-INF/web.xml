@@ -7,10 +7,10 @@
     <display-name>EduManager Application</display-name>
 
     <welcome-file-list>
-        <welcome-file>home</welcome-file>
+        <welcome-file>login</welcome-file>
     </welcome-file-list>
 
-    <!-- Filtre d'authentification -->
+    <!--
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.example.edumanager.filters.AuthenticationFilter</filter-class>
@@ -19,7 +19,7 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+    -->
     <!-- Configuration du servlet de connexion -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
