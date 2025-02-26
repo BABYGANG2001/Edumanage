@@ -10,17 +10,7 @@
         <welcome-file>login</welcome-file>
     </welcome-file-list>
 
-    <!--
-    <filter>
-        <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.example.edumanager.filters.AuthenticationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    -->
-    <!-- Configuration du servlet de connexion -->
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.example.edumanager.controllers.LoginServlet</servlet-class>
