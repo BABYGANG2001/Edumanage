@@ -6,8 +6,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 
 @WebFilter("/*")
@@ -26,12 +24,10 @@ public class AuthenticationFilter implements Filter {
 
         String path = httpRequest.getServletPath();
 
-        // Vérifier si le chemin est public
+
         if ("/".equals(path) || "/login".equals(path) || "/login.jsp".equals(path)) {
-            // Autoriser l'accès sans authentification
             chain.doFilter(request, response);
         }else {
-            // Vérifier si l'utilisateur est authentifié
             HttpSession session = httpRequest.getSession(false);
             boolean isAuthenticated = (session != null && session.getAttribute("username") != null);
 
@@ -44,14 +40,11 @@ public class AuthenticationFilter implements Filter {
         }
 
     }
-    /*
+
+
     @Override
     public void destroy() {
         // Nettoyage des ressources
     }
-
-     */
-
-
 
 }

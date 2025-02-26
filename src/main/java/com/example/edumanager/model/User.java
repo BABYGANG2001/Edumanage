@@ -49,14 +49,4 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
-    //Vérifie si le mot de passe fourni correspond au mot de passe de l'utilisateur
-
-    public boolean checkPassword(String rawPassword) {
-        return this.password.equals(rawPassword);
-    }
-
-    public boolean hasRole(String roleToCheck) {
-        return this.role.equals(roleToCheck);
-    }
 }
