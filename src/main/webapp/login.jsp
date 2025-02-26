@@ -1,89 +1,141 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduManager - Connexion</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
         }
-        .login-container {
-            max-width: 450px;
-            margin: 100px auto;
-        }
-        .card {
+
+        .wrapper {
+            width: 400px;
+            background: #fff;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            padding: 30px 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .card-header {
-            background: linear-gradient(to right, #007bff, #6610f2);
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            padding: 20px;
+
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
         }
-        .btn-login {
-            background: linear-gradient(to right, #007bff, #6610f2);
-            color: white;
-            font-weight: bold;
-            border: none;
-            padding: 10px;
+
+        .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
         }
-        .logo-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
+
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            padding: 20px 45px 20px 20px;
+            border: 1px solid #ccc;
+            border-radius: 40px;
+            outline: none;
+            font-size: 16px;
         }
-        .error-message {
-            color: #dc3545;
+
+        .input-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #555;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
             font-size: 14px;
-            margin-bottom: 15px;
         }
+
+        .remember-forgot a {
+            color: #9b59b6;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            height: 45px;
+            border-radius: 40px;
+            border: none;
+            outline: none;
+            background: #9b59b6;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #8e44ad;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #9b59b6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
-<div class="container login-container">
-    <div class="card">
-        <div class="card-header text-center">
-            <i class="fas fa-graduation-cap logo-icon"></i>
-            <h3>EduManager</h3>
-            <p class="mb-0">Système de Gestion Éducative</p>
+<div class="wrapper">
+    <form action="login" method="post">
+        <h1>Login</h1>
+        <% if(request.getAttribute("errorMessage") != null) { %>
+        <div class="error-message text-center">
+            <%= request.getAttribute("errorMessage") %>
         </div>
-        <div class="card-body p-4">
-            <h4 class="text-center mb-4">Connexion</h4>
+        <% } %>
+        <div class="input-box">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
 
-            <% if(request.getAttribute("errorMessage") != null) { %>
-            <div class="error-message text-center">
-                <%= request.getAttribute("errorMessage") %>
-            </div>
-            <% } %>
+        <button type="submit" class="btn">Login</button>
 
-            <form action="login" method="post">
-                <div class="form-group">
-                    <label for="username"><i class="fas fa-user mr-2"></i>Nom d'utilisateur</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password"><i class="fas fa-lock mr-2"></i>Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
-                </div>
-                <button type="submit" class="btn btn-login btn-block">Se connecter</button>
-            </form>
-        </div>
-        <div class="card-footer text-center text-muted">
-            © 2025 EduManager - Tous droits réservés
-        </div>
-    </div>
+    </form>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
