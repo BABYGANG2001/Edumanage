@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="enrollments">Inscriptions</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Déconnecter</a>
+                </li>
             </ul>
         </div>
     </div>

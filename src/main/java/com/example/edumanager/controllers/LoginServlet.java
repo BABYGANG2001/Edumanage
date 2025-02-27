@@ -28,20 +28,37 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String action = request.getServletPath();
 
-        User admin = userDAO.getUser();
+        try {
+            switch (action) {
+                case "/logout":
+                    request.getSession().invalidate();
+                    response.sendRedirect("login.jsp");
+                    break;
+                default:
+                    String username = request.getParameter("username");
+                    String password = request.getParameter("password");
+
+                    User admin = userDAO.getUser();
 
 
-        if(admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("username", username);
-            session.setAttribute("password", password);
-            response.sendRedirect("home");
-        }else {
-            request.setAttribute("errorMessage", "Nom d'utilisateur ou mot de passe incorrect");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+                    if(admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("username", username);
+                        session.setAttribute("password", password);
+                        response.sendRedirect("home");
+                    }else {
+                        request.setAttribute("errorMessage", "Nom d'utilisateur ou mot de passe incorrect");
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            throw new ServletException("An error occurred processing POST request", e);
         }
+
+
+
     }
 }
